@@ -70,7 +70,6 @@ chrome.contextMenus.onClicked.addListener(async function (info, tab) {
 				resolve(data.userServer)
 			})
 		})
-		console.log('Retrieved server:', server)
 		// Open settings if needed
 		if (!server) {
 			chrome.runtime.openOptionsPage()
@@ -95,4 +94,23 @@ chrome.contextMenus.onClicked.addListener(async function (info, tab) {
 		// Open popup
 		createPopup(server, shareLink, shareText, tab)
 	}
+})
+
+// Function for action button
+chrome.action.onClicked.addListener(async function (tab) {
+	// Check if there is a saved server
+	var server = await new Promise(function (resolve) {
+		chrome.storage.sync.get(function (data) {
+			resolve(data.userServer)
+		})
+	})
+	// Open settings if needed
+	if (!server) {
+		chrome.runtime.openOptionsPage()
+		return false
+	}
+	// Open popup
+	var shareLink = tab.url
+	var shareText = tab.title
+	createPopup(server, shareLink, shareText, tab)
 })

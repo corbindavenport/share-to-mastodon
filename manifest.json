@@ -6,16 +6,22 @@
 	"homepage_url": "https://github.com/corbindavenport/share-to-mastodon",
 	"description": "Share links to Mastodon in one click!",
 	"options_ui": {
-		"page": "settings.html",	
+		"page": "settings.html",
 		"open_in_tab": false
 	},
-	"omnibox": {
-		"keyword": "wiki"
+	"action": {
+		"default_icon": {
+			"16": "img/icon_x16.png",
+			"32": "img/icon_x32.png",
+			"48": "img/icon_x48.png"
+		},
+		"default_title": "Share this page to Mastodon"
 	},
 	"permissions": [
 		"contextMenus",
 		"storage",
-		"notifications"
+		"notifications",
+		"activeTab"
 	],
 	"minimum_chrome_version": "93",
 	"background": {
