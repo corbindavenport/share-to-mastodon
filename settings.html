@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/dark.css" rel="stylesheet" media="(prefers-color-scheme: dark)">
+    <style>
+        body {
+            max-width: 450px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <!-- Alert for no server -->
+        <div class="alert alert-primary d-none" id="mastodon-server-alert" role="alert">
+            You have to enter a server before you can share links!
+        </div>
+        <!-- Server select -->
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Mastodon server</label>
+            <input type="text" class="form-control" id="mastodon-server" placeholder="yourserver.social" disabled>
+        </div>
+        <hr>
+        <p>If you find Share to Mastodon useful, please donate to support continued development. It would mean a lot!</p>
+        <div class="row mb-3">
+            <div class="col-6">
+                <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=4SZVSMJKDS35J&lc=US&item_name=Share%20to%20Mastodon%20Donation&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted" target="_blank">
+                    <button type="button" class="btn btn-sm btn-success w-100">Donate via PayPal</button>
+                </a>
+            </div>
+            <div class="col-6">
+                <a href="https://cash.app/$corbdav" target="_blank">
+                    <button type="button" class="btn btn-sm btn-success w-100">Donate via Cash App</button>
+                </a>
+            </div>
+        </div>
+        <hr>
+        <a href="https://github.com/corbindavenport/wikipedia-search/" target="_blank" class="d-block mb-3">
+            <button type="button" class="btn btn-sm btn-primary w-100">Open GitHub repository</button>
+        </a>
+        <a href="https://discord.com/invite/59wfy5cNHw" target="_blank" class="d-block mb-3">
+            <button type="button" class="btn btn-sm btn-primary w-100">Join Discord server</button>
+        </a>
+        <a href="https://toot.community/@corbin" target="_blank" class="d-block mb-3">
+            <button type="button" class="btn btn-sm btn-primary w-100">Follow on Mastodon</button>
+        </a>
+    </div>
+
+    <script src="js/settings.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,30 @@
+{
+	"manifest_version": 3,
+	"name": "Share to Mastodon",
+	"version": "1.0",
+	"author": "Corbin Davenport",
+	"homepage_url": "https://github.com/corbindavenport/share-to-mastodon",
+	"description": "Share links to Mastodon in one click!",
+	"options_ui": {
+		"page": "settings.html",	
+		"open_in_tab": false
+	},
+	"omnibox": {
+		"keyword": "wiki"
+	},
+	"permissions": [
+		"contextMenus",
+		"storage",
+		"notifications"
+	],
+	"minimum_chrome_version": "93",
+	"background": {
+		"service_worker": "js/background.js"
+	},
+	"icons": {
+		"16": "img/icon_x16.png",
+		"48": "img/icon_x48.png",
+		"128": "img/icon_x128.png",
+		"512": "img/icon_x512.png"
+	}
+}
