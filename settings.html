@@ -17,13 +17,17 @@
 <body>
     <div class="container-fluid">
         <!-- Alert for no server -->
-        <div class="alert alert-primary d-none" id="mastodon-server-alert" role="alert">
+        <div class="alert alert-primary d-none mb-3" id="mastodon-server-alert" role="alert">
             You have to enter a server before you can share links!
         </div>
         <!-- Server select -->
         <div class="mb-3">
-            <label for="exampleFormControlInput1" class="form-label">Mastodon server</label>
+            <label for="mastodon-server" class="form-label">Mastodon server</label>
             <input type="text" class="form-control" id="mastodon-server" placeholder="yourserver.social" disabled>
+        </div>
+        <!-- Link to keyboard shortcut -->
+        <div class="mb-3">
+            <button type="button" class="btn btn-sm btn-primary w-100" id="mastodon-keyboard-shortcut">Change keyboard shortcut</button>
         </div>
         <hr>
         <p>If you find Share to Mastodon useful, please donate to support continued development. It would mean a lot!</p>

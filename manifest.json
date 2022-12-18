@@ -17,6 +17,12 @@
 		},
 		"default_title": "Share this page to Mastodon"
 	},
+	"commands": {
+		"_execute_action": {
+		  "suggested_key": "Ctrl+Shift+S",
+		  "description": "Share current page on Mastodon"
+		}
+	},
 	"permissions": [
 		"contextMenus",
 		"storage",
