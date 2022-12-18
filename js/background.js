@@ -4,7 +4,7 @@ chrome.runtime.onInstalled.addListener(function (details) {
 	chrome.contextMenus.create({
 		id: "share-to-mastodon",
 		title: 'Share to Mastodon',
-		contexts: ['selection', 'link', 'image', 'video', 'page']
+		contexts: ['selection', 'link', 'page']
 	})
 	// Show welcome message
 	if (details.reason === 'install' || details.reason === 'update') {
@@ -78,10 +78,7 @@ chrome.contextMenus.onClicked.addListener(async function (info, tab) {
 		// Set link and description
 		var shareLink = ''
 		var shareText = ''
-		if (info.mediaType) {
-			shareLink = info.srcUrl
-			shareText = tab.title
-		} else if (info.linkUrl) {
+		if (info.linkUrl) {
 			shareLink = info.linkUrl
 			shareText = 'Type something here'
 		} else if (info.selectionText) {
