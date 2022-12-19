@@ -47,8 +47,8 @@ function createPopup(serverDomain, shareLink, shareText, tab) {
 	var popupPage = 'https://' + serverDomain + '/share?text=' + encodeURIComponent(shareText + '\n\n' + shareLink)
 	var popupWidth = 500
 	var popupHeight = 500
-	var y = Math.round(tab.height / 2 - (popupHeight / 2))
-	var x = Math.round(tab.width / 2 - (popupWidth / 2))
+	var y = Math.round((tab.height / 2) - (popupHeight / 2))
+	var x = Math.round((tab.width / 2) - (popupWidth / 2))
 	console.log(popupWidth, popupHeight, y, x)
 	chrome.windows.create({
 		url: popupPage,
