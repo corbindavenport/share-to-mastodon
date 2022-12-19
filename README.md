@@ -8,6 +8,6 @@ The extension displays a popup window, where you can edit the pre-filled message
 
 **Download for Microsoft Edge (WIP)**
 
-Firefox support is [blocked](https://github.com/corbindavenport/share-to-mastodon/issues/1) by limited Manifest V3 support. This project is not affilated with the Mastodon project or Mastodon gGmbH.
+Firefox support is [blocked](https://github.com/corbindavenport/share-to-mastodon/issues/1) by limited Manifest V3 support. This project is not affiliated with the Mastodon project or Mastodon gGmbH.
 
 ![Screenshot of extension in Google Chrome](https://i.imgur.com/vKexj06.png)
