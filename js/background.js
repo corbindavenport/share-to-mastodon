@@ -27,7 +27,7 @@ chrome.runtime.onInstalled.addListener(function (details) {
 		chrome.notifications.create(notification, () => {
 			// Handle notification click
 			chrome.notifications.onClicked.addListener(function () {
-				//chrome.tabs.create({ url: 'https://corbin.io/' })
+				chrome.tabs.create({ url: 'https://corbin.io/introducing-share-to-mastodon/' })
 			})
 			// Handle notification button clicks
 			chrome.notifications.onButtonClicked.addListener(function (_, buttonIndex) {
