@@ -3,7 +3,7 @@ async function loadSettings() {
 	// Retrieve settings from storage
 	const server = document.getElementById('mastodon-server')
 	new Promise(function (resolve) {
-		chrome.storage.sync.get(function (data) {
+		chrome.storage.local.get(function (data) {
 			console.log(data)
 			// Server setting
 			if (data.userServer) {
@@ -22,7 +22,7 @@ async function loadSettings() {
 // Save settings after any input change
 document.querySelectorAll('input,select').forEach(function (el) {
 	el.addEventListener('change', function () {
-		chrome.storage.sync.set({
+		chrome.storage.local.set({
 			userServer: document.querySelector('#mastodon-server').value,
 		}, function() {
 			console.log('Settings saved')

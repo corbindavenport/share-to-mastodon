@@ -66,7 +66,7 @@ chrome.contextMenus.onClicked.addListener(async function (info, tab) {
 	if (info.menuItemId == "share-to-mastodon") {
 		// Check if there is a saved server
 		var server = await new Promise(function (resolve) {
-			chrome.storage.sync.get(function (data) {
+			chrome.storage.local.get(function (data) {
 				resolve(data.userServer)
 			})
 		})
@@ -94,10 +94,10 @@ chrome.contextMenus.onClicked.addListener(async function (info, tab) {
 })
 
 // Function for action button
-chrome.action.onClicked.addListener(async function (tab) {
+browser.browserAction.onClicked.addListener(async function (tab) {
 	// Check if there is a saved server
 	var server = await new Promise(function (resolve) {
-		chrome.storage.sync.get(function (data) {
+		chrome.storage.local.get(function (data) {
 			resolve(data.userServer)
 		})
 	})

@@ -1,5 +1,5 @@
 {
-	"manifest_version": 3,
+	"manifest_version": 2,
 	"name": "Share to Mastodon",
 	"version": "1.0",
 	"author": "Corbin Davenport",
@@ -9,7 +9,7 @@
 		"page": "settings.html",
 		"open_in_tab": false
 	},
-	"action": {
+	"browser_action": {
 		"default_icon": {
 			"16": "img/icon_x16.png",
 			"32": "img/icon_x32.png",
@@ -19,7 +19,9 @@
 	},
 	"commands": {
 		"_execute_action": {
-		  "suggested_key": "Ctrl+Shift+S",
+		  "suggested_key": {
+			"default": "Ctrl+Shift+S"
+		  },
 		  "description": "Share current page on Mastodon"
 		}
 	},
@@ -29,9 +31,8 @@
 		"notifications",
 		"activeTab"
 	],
-	"minimum_chrome_version": "93",
 	"background": {
-		"service_worker": "js/background.js"
+		"scripts": ["js/background.js"]
 	},
 	"icons": {
 		"16": "img/icon_x16.png",
