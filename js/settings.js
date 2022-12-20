@@ -30,9 +30,4 @@ document.querySelectorAll('input,select').forEach(function (el) {
 	})
 })
 
-// Open keyboard shortcut
-document.querySelector('#mastodon-keyboard-shortcut').addEventListener('click', function() {
-	chrome.tabs.create({ url: 'chrome://extensions/shortcuts#:~:text=Share%20to%20Mastodon' })
-})
-
 loadSettings()
