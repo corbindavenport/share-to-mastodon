@@ -19,10 +19,10 @@
 	},
 	"commands": {
 		"_execute_action": {
-		  "suggested_key": {
-			"default": "Ctrl+Shift+S"
-		  },
-		  "description": "Share current page on Mastodon"
+			"suggested_key": {
+				"default": "Ctrl+Shift+Y"
+			},
+			"description": "Share current page on Mastodon"
 		}
 	},
 	"permissions": [
@@ -32,7 +32,9 @@
 		"activeTab"
 	],
 	"background": {
-		"scripts": ["js/background.js"]
+		"scripts": [
+			"js/background.js"
+		]
 	},
 	"icons": {
 		"16": "img/icon_x16.png",
