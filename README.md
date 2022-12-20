@@ -6,7 +6,7 @@ The extension displays a popup window, where you can edit the pre-filled message
 
 **[Download for Google Chrome](https://chrome.google.com/webstore/detail/bibnjflclpdmbbcncejifemmbggkcjde)**
 
-**Download for Firefox ([WIP](https://github.com/corbindavenport/share-to-mastodon/issues/1), `firefox` branch)**
+**[Download for Firefox](https://addons.mozilla.org/en-US/firefox/addon/share-to-mastodon/)** (source code is on [firefox branch](https://github.com/corbindavenport/share-to-mastodon/tree/firefox))
 
 **Download for Microsoft Edge (WIP)**
 
