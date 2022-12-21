@@ -8,7 +8,7 @@ The extension displays a popup window, where you can edit the pre-filled message
 
 **[Download for Firefox](https://addons.mozilla.org/en-US/firefox/addon/share-to-mastodon/)** (source code is on [firefox branch](https://github.com/corbindavenport/share-to-mastodon/tree/firefox))
 
-**Download for Microsoft Edge (WIP)**
+**[Download for Microsoft Edge](https://microsoftedge.microsoft.com/addons/detail/share-to-mastodon/ppgabkpkgkkcejnnmgckomgfdeanejnc)**
 
 This project is not affiliated with the Mastodon project or Mastodon gGmbH.
 
