@@ -1,37 +1,55 @@
-// Function for populating settings
-async function loadSettings() {
-	// Retrieve settings from storage
-	const server = document.getElementById('mastodon-server')
-	new Promise(function (resolve) {
-		chrome.storage.sync.get(function (data) {
-			console.log(data)
-			// Server setting
-			if (data.userServer) {
-				server.value = data.userServer
-			} else {
-				document.querySelector('#mastodon-server-alert').classList.remove('d-none')
-			}
-			resolve()
-		})
-	}).then(function () {
-		// Allow interaction on settings
-		server.removeAttribute('disabled')
+const serverList = document.querySelector('#mastodon-server-list')
+
+// Function to load settings from storage
+function loadSettings() {
+	chrome.storage.sync.get(function (data) {
+		for (const i of data.serverList) {
+			var el = document.createElement('option')
+			el.value = i
+			el.innerText = i
+			serverList.appendChild(el)
+		}
 	})
 }
 
-// Save settings after any input change
-document.querySelectorAll('input,select').forEach(function (el) {
-	el.addEventListener('change', function () {
-		chrome.storage.sync.set({
-			userServer: document.querySelector('#mastodon-server').value,
-		}, function() {
-			console.log('Settings saved')
-		})
+// Function to save settings to storage
+function saveSettings() {
+	// Get list of servers
+	var array = []
+	document.querySelectorAll('#mastodon-server-list option').forEach(function (el) {
+		array.push(el.value)
 	})
+	console.log(array)
+	// Save to storage
+	chrome.storage.sync.set({
+		serverList: array
+	}, function () {
+		console.log('Settings saved')
+	})
+}
+
+// Add server to list
+document.querySelector('#server-add-btn').addEventListener('click', function () {
+	var domain = document.querySelector('#mastodon-server-text').value.replace(' ', '')
+	if (domain) {
+		var el = document.createElement('option')
+		el.value = domain
+		el.innerText = domain
+		serverList.appendChild(el)
+		serverList.value = domain
+		saveSettings()
+	}
+})
+
+// Remove button
+document.querySelector('#server-remove-btn').addEventListener('click', function () {
+	var selectedOption = serverList.querySelector('option[value="' + serverList.value + '"]')
+	serverList.removeChild(selectedOption)
+	saveSettings()
 })
 
 // Open keyboard shortcut
-document.querySelector('#mastodon-keyboard-shortcut').addEventListener('click', function() {
+document.querySelector('#mastodon-keyboard-shortcut').addEventListener('click', function () {
 	chrome.tabs.create({ url: 'chrome://extensions/shortcuts#:~:text=Share%20to%20Mastodon' })
 })
 

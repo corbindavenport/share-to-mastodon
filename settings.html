@@ -21,10 +21,15 @@
             You have to enter a server before you can share links!
         </div>
         <!-- Server select -->
-        <div class="mb-3">
-            <label for="mastodon-server" class="form-label">Mastodon server</label>
-            <input type="text" class="form-control" id="mastodon-server" placeholder="yourserver.social" disabled>
+        <div class="mb-1">
+            <label for="mastodon-server-list" class="form-label">Mastodon servers</label>
+            <select id="mastodon-server-list" class="form-select" size="5" aria-label="Mastodon server list"></select>
         </div>
+        <div class="input-group input-group-sm mb-1">
+            <input type="text" class="form-control" id="mastodon-server-text" placeholder="yourserver.social" aria-label="Server domain" aria-describedby="server-add-btn">
+            <button class="btn btn-outline-secondary" type="button" id="server-add-btn">Add</button>
+        </div>
+        <button class="btn btn-sm btn-outline-secondary w-100 mb-3" type="button" id="server-remove-btn">Remove selected</button>
         <!-- Link to keyboard shortcut -->
         <div class="mb-3">
             <button type="button" class="btn btn-sm btn-primary w-100" id="mastodon-keyboard-shortcut">Change keyboard shortcut</button>
@@ -55,6 +60,7 @@
         </a>
     </div>
 
+    <script src="js/bootstrap.js"></script>
     <script src="js/settings.js"></script>
 
 </body>

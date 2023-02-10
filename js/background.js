@@ -44,7 +44,8 @@ chrome.runtime.onInstalled.addListener(function (details) {
 
 // Function for creating share popup
 function createPopup(serverDomain, shareLink, shareText, tab) {
-	var popupPage = 'https://' + serverDomain + '/share?text=' + encodeURIComponent(shareText + '\n\n' + shareLink)
+	var test = chrome.runtime.getURL('share.html')
+	var popupPage = test + '?text=' + encodeURIComponent(shareText + '\n\n' + shareLink)
 	var popupWidth = 500
 	var popupHeight = 500
 	var y = Math.round((tab.height / 2) - (popupHeight / 2))
@@ -64,6 +65,7 @@ function createPopup(serverDomain, shareLink, shareText, tab) {
 chrome.contextMenus.onClicked.addListener(async function (info, tab) {
 	console.log(info, tab)
 	if (info.menuItemId == "share-to-mastodon") {
+		/*
 		// Check if there is a saved server
 		var server = await new Promise(function (resolve) {
 			chrome.storage.sync.get(function (data) {
@@ -75,6 +77,7 @@ chrome.contextMenus.onClicked.addListener(async function (info, tab) {
 			chrome.runtime.openOptionsPage()
 			return false
 		}
+		*/
 		// Set link and description
 		var shareLink = ''
 		var shareText = ''
@@ -89,7 +92,7 @@ chrome.contextMenus.onClicked.addListener(async function (info, tab) {
 			shareText = 'Type something here'
 		}
 		// Open popup
-		createPopup(server, shareLink, shareText, tab)
+		createPopup('temp', shareLink, shareText, tab)
 	}
 })
 
