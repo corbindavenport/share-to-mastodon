@@ -14,14 +14,27 @@ var shareLink = ''
         */
 
 async function init() {
+    // Generate links to options page
+    document.querySelectorAll('.extension-settings-link').forEach(function(el) {
+        el.addEventListener('click', function() {
+            chrome.runtime.openOptionsPage()
+            window.close()
+        })
+    })
     // Get data from URL and storage
     var inputParams = new URL((window.location.href)).searchParams
     var shareLink = inputParams.get('link')
     var shareText = inputParams.get('text')
     var data = await chrome.storage.sync.get()
     // Show warning if no servers are saved
-    if (!data.serverList) {
+    if ((!data.serverList) || (data.serverList.length === 0)) {
         document.querySelector('#server-warning').classList.remove('d-none')
+        return false
+    }
+    // If there's only one server, redirect to that one
+    if (data.serverList.length === 1) {
+        document.querySelector('#server-loading').classList.remove('d-none')
+        window.location = 'https://' + data.serverList[0] + '/share?text=' + encodeURIComponent(shareText + '\n\n' + shareLink)
         return false
     }
     // Create list of servers
