@@ -10,39 +10,40 @@
     <link href="css/dark.css" rel="stylesheet" media="(prefers-color-scheme: dark)">
     <style>
         .list-group-item img {
-            width: 1em;
-            height: auto;
-            margin-right: 5px;
+            height: 1.3em;
+            width: 1.3em;
+            margin: 0.2em 0;
+            margin-right: 0.5em;
         }
     </style>
 </head>
 
 <body>
-    <div class="list-group mb-2 list-group-flush border-bottom">
+    <!-- UI for no servers saved -->
+    <div id="server-warning" class="container text-center p-5 d-none">
+        You don't have any servers saved! Why don't you <a href="#">add some</a>?
+    </div>
+    <!-- Server selection UI -->
+    <div id="server-list" class="list-group mb-2 list-group-flush border-bottom d-none">
         <li class="list-group-item list-group-item-dark">
             Select a server
             <div class="float-end">
                 <a href="#" target="_blank">
-                    Add or remove servers
+                    Edit servers
                 </a>
             </div>
         </li>
-        <a href="#" class="list-group-item list-group-item-action display-6">
-            <img src="https://toot.community/favicon.ico">
-            toot.community
-        </a>
-        <a href="#" class="list-group-item list-group-item-action display-6">
-            <img src="https://toot.cafe/favicon.ico">
-            toot.cafe
-        </a>
-        <a href="#" class="list-group-item list-group-item-action display-6">
-            <img src="https://mastodon.social/favicon.ico">
-            mastodon.social
-        </a>
+    </div>
+    <!-- Initial loading UI -->
+    <div id="server-loading" class="text-center p-5 d-none">
+        <div class="spinner-border mb-3" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+        <p>You are being redirected to the selected server, please wait.</p>
     </div>
 
     <script src="js/bootstrap.js"></script>
-    <script src="js/settings.js"></script>
+    <script src="js/share.js"></script>
 
 </body>
 
