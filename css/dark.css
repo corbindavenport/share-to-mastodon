@@ -36,6 +36,6 @@ a:hover {
     color: #d3d3d3;
 }
 
-.border-top {
+.border-top, .border-bottom, .list-group-item {
     border-color: #000 !important;
 }

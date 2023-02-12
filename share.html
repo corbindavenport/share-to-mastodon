@@ -10,7 +10,7 @@
     <link href="css/dark.css" rel="stylesheet" media="(prefers-color-scheme: dark)">
     <style>
         .list-group-item img {
-            width: 20px;
+            width: 1em;
             height: auto;
             margin-right: 5px;
         }
@@ -18,24 +18,26 @@
 </head>
 
 <body>
-    <div class="container-fluid">
-        <div class="mt-2 mb-2 text-muted">Select a server</div>
-        <div class="list-group mb-2">
-            <a href="#" class="list-group-item list-group-item-action">
-                <img src="https://toot.community/favicon.ico">
-                toot.community
-            </a>
-            <a href="#" class="list-group-item list-group-item-action">
-                <img src="https://toot.cafe/favicon.ico">
-                toot.cafe
-            </a>
-            <a href="#" class="list-group-item list-group-item-action">
-                <img src="https://mastodon.social/favicon.ico">
-                mastodon.social
-            </a>
-          </div>
-          <a href="#" target="_blank">
-            <button type="button" class="btn btn-sm btn-outline-secondary w-100 mb-2">Add or remove servers</button>
+    <div class="list-group mb-2 list-group-flush border-bottom">
+        <li class="list-group-item list-group-item-dark">
+            Select a server
+            <div class="float-end">
+                <a href="#" target="_blank">
+                    Add or remove servers
+                </a>
+            </div>
+        </li>
+        <a href="#" class="list-group-item list-group-item-action display-6">
+            <img src="https://toot.community/favicon.ico">
+            toot.community
+        </a>
+        <a href="#" class="list-group-item list-group-item-action display-6">
+            <img src="https://toot.cafe/favicon.ico">
+            toot.cafe
+        </a>
+        <a href="#" class="list-group-item list-group-item-action display-6">
+            <img src="https://mastodon.social/favicon.ico">
+            mastodon.social
         </a>
     </div>
 
