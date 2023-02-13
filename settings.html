@@ -11,23 +11,30 @@
         body {
             max-width: 450px;
         }
+        select {
+            overflow: auto;
+        }
     </style>
 </head>
 
 <body>
     <div class="container-fluid">
-        <!-- Server select -->
-        <div class="mb-1">
-            <label for="mastodon-server-list" class="form-label">Mastodon servers</label>
-            <select id="mastodon-server-list" class="form-select" size="5" aria-label="Mastodon server list"></select>
-        </div>
-        <div class="input-group input-group-sm mb-1">
+        <!-- Add a server -->
+        <label for="mastodon-server-text" class="form-label">Add a server</label>
+        <div class="input-group input-group-sm">
             <input type="text" class="form-control" id="mastodon-server-text" placeholder="yourserver.social" aria-label="Server domain" aria-describedby="server-add-btn">
             <button class="btn btn-outline-secondary" type="button" id="server-add-btn">Add</button>
         </div>
+        <small class="text-muted">Server must be running <a href="https://github.com/mastodon/mastodon/releases/tag/v1.6.0" target="_blank">Mastodon 1.6</a> or newer.</small>
+        <!-- Server select -->
+        <div class="mt-3 mb-1">
+            <label for="mastodon-server-list" class="form-label">Saved servers</label>
+            <select id="mastodon-server-list" class="form-select" size="5" aria-label="Saved servers list"></select>
+        </div>
         <button class="btn btn-sm btn-outline-secondary w-100 mb-3" type="button" id="server-remove-btn">Remove selected</button>
-        <!-- Link to keyboard shortcut -->
+        <!-- Other options -->
         <div class="mb-3">
+            <label class="form-label">Other settings</label>
             <button type="button" class="btn btn-sm btn-primary w-100" id="mastodon-keyboard-shortcut">Change keyboard shortcut</button>
         </div>
         <hr>

@@ -1,18 +1,4 @@
-/*
-var shareLink = ''
-        var shareText = ''
-        if (info.linkUrl) {
-            shareLink = info.linkUrl
-            shareText = 'Type something here'
-        } else if (info.selectionText) {
-            shareLink = info.pageUrl
-            shareText = '"' + info.selectionText + '"'
-        } else {
-            shareLink = info.pageUrl
-            shareText = 'Type something here'
-        }
-        */
-
+// Function to initialize UI and redirects
 async function init() {
     // Generate links to options page
     document.querySelectorAll('.extension-settings-link').forEach(function(el) {
@@ -43,14 +29,19 @@ async function init() {
         // Create link list element
         var serverUrl = data.serverList[server]
         var linkEl = document.createElement('a')
-        linkEl.classList.add('list-group-item', 'list-group-item', 'list-group-item-action', 'display-6')
+        linkEl.classList.add('list-group-item', 'list-group-item', 'list-group-item-action', 'fw-bold')
         linkEl.innerText = serverUrl
         linkEl.href = 'https://' + serverUrl + '/share?text=' + encodeURIComponent(shareText + '\n\n' + shareLink)
         linkEl.rel = 'preconnect'
         // Add server icon to list
         var serverImg = document.createElement('img')
-        serverImg.src = 'https://' + serverUrl + '/favicon.ico'
-        serverImg.alt = serverUrl + ' icon'
+        serverImg.setAttribute('src', 'https://' + serverUrl + '/favicon.ico')
+        serverImg.setAttribute('alt', serverUrl + ' icon')
+        serverImg.ariaHidden = 'true'
+        serverImg.onerror = function() {
+            // Show a monochrome Mastodon icon if the server isn't responding
+            this.src = chrome.runtime.getURL('img/mastodon-offline.png')
+        }
         linkEl.prepend(serverImg)
         // Inject element
         serverListEl.appendChild(linkEl)
