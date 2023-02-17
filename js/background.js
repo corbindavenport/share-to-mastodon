@@ -1,11 +1,7 @@
 // Initialize welcome message and context menu entry on extension load
 chrome.runtime.onInstalled.addListener(function (details) {
 	// Initialize context menu
-	chrome.contextMenus.create({
-		id: "share-to-mastodon",
-		title: 'Share to Mastodon',
-		contexts: ['selection', 'link', 'page']
-	})
+	createContextMenu()
 	// Show welcome message
 	if (details.reason === 'install' || details.reason === 'update') {
 		// Set message
@@ -42,9 +38,75 @@ chrome.runtime.onInstalled.addListener(function (details) {
 	}
 })
 
+// Function for creating context menu entries
+async function createContextMenu() {
+	// Remove existing entries if they exist
+	await chrome.contextMenus.removeAll()
+	// Create a menu entry for each saved server
+	var data = await chrome.storage.sync.get()
+	if ((!data.serverList) || (data.serverList.length === 0)) {
+		// Create generic menu item because no servers are set yet
+		chrome.contextMenus.create({
+			id: "generic",
+			title: 'Share to Mastodon',
+			contexts: ['selection', 'link', 'page']
+		})
+	} else {
+		// Create menu item for each saved server
+		for (server in data.serverList) {
+			var serverUrl = data.serverList[server]
+			chrome.contextMenus.create({
+				id: serverUrl,
+				title: 'Share to ' + serverUrl,
+				contexts: ['selection', 'link', 'page']
+			})
+		}
+		// Add seperator and link to settings
+		chrome.contextMenus.create({
+			id: 'none',
+			type: 'separator',
+			contexts: ['selection', 'link', 'page']
+		})
+		chrome.contextMenus.create({
+			id: 'edit-servers',
+			title: 'Edit server list',
+			contexts: ['selection', 'link', 'page']
+		})
+	}
+}
+
+// Function for handling context menu clicks
+chrome.contextMenus.onClicked.addListener(async function (info, tab) {
+	// Open settings page if requested
+	if (info.menuItemId === 'edit-servers') {
+		chrome.runtime.openOptionsPage()
+		return false
+	}
+	// Set link and description
+	var shareLink = ''
+	var shareText = ''
+	if (info.linkUrl) {
+		shareLink = info.linkUrl
+		shareText = 'Type something here'
+	} else if (info.selectionText) {
+		shareLink = info.pageUrl
+		shareText = '"' + info.selectionText + '"'
+	} else {
+		shareLink = info.pageUrl
+		shareText = 'Type something here'
+	}
+	// Open popup
+	createPopup(info.menuItemId, shareLink, shareText, tab)
+})
+
+// Reload context menu options on storage change (e.g. when added or removed on settings page)
+chrome.storage.onChanged.addListener(function() {
+	createContextMenu()
+})
+
 // Function for creating share popup
-function createPopup(shareLink, shareText, tab) {
-	var popupPage = chrome.runtime.getURL('share.html') + '?link=' + encodeURIComponent(shareLink) + '&text=' + encodeURIComponent(shareText)
+function createPopup(serverUrl, shareLink, shareText, tab) {
+	var popupPage = chrome.runtime.getURL('share.html') + '?server=' + serverUrl + '&link=' + encodeURIComponent(shareLink) + '&text=' + encodeURIComponent(shareText)
 	var popupWidth = 500
 	var popupHeight = 500
 	var y = Math.round((tab.height / 2) - (popupHeight / 2))
@@ -60,29 +122,7 @@ function createPopup(shareLink, shareText, tab) {
 	})
 }
 
-// Function for context menu search
-chrome.contextMenus.onClicked.addListener(async function (info, tab) {
-	console.log(info, tab)
-	if (info.menuItemId == "share-to-mastodon") {
-		// Set link and description
-		var shareLink = ''
-		var shareText = ''
-		if (info.linkUrl) {
-			shareLink = info.linkUrl
-			shareText = 'Type something here'
-		} else if (info.selectionText) {
-			shareLink = info.pageUrl
-			shareText = '"' + info.selectionText + '"'
-		} else {
-			shareLink = info.pageUrl
-			shareText = 'Type something here'
-		}
-		// Open popup
-		createPopup(shareLink, shareText, tab)
-	}
-})
-
 // Function for action button
 chrome.action.onClicked.addListener(async function (tab) {
-	createPopup(tab.url, tab.title, tab)
+	createPopup('generic', tab.url, tab.title, tab)
 })

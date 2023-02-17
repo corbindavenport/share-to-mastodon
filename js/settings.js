@@ -37,6 +37,7 @@ document.querySelector('#server-add-btn').addEventListener('click', function () 
 		el.innerText = domain
 		serverList.appendChild(el)
 		serverList.value = domain
+		document.querySelector('#mastodon-server-text').value = ''
 		saveSettings()
 	}
 })

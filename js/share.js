@@ -17,12 +17,17 @@ async function init() {
         document.querySelector('#server-warning').classList.remove('d-none')
         return false
     }
-    // If there's only one server, redirect to that one
-    if (data.serverList.length === 1) {
+    // If there's only one server, or if the server was picked from the context menu, redirect to that one
+    if (inputParams.get('server') != 'generic') {
+        document.querySelector('#server-loading').classList.remove('d-none')
+        window.location = 'https://' + inputParams.get('server') + '/share?text=' + encodeURIComponent(shareText + '\n\n' + shareLink)
+        return false
+    } else if (data.serverList.length === 1) {
         document.querySelector('#server-loading').classList.remove('d-none')
         window.location = 'https://' + data.serverList[0] + '/share?text=' + encodeURIComponent(shareText + '\n\n' + shareLink)
         return false
     }
+    console.log(inputParams.get('server'))
     // Create list of servers
     var serverListEl = document.querySelector('#server-list')
     for (server in data.serverList) {
