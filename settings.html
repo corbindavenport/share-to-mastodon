@@ -17,7 +17,7 @@
     </style>
 </head>
 
-<body>
+<body class="user-select-none">
     <div class="container-fluid">
         <!-- Add a server -->
         <label for="mastodon-server-text" class="form-label">Add a server</label>
@@ -25,7 +25,7 @@
             <input type="text" class="form-control" id="mastodon-server-text" placeholder="yourserver.social" aria-label="Server domain" aria-describedby="server-add-btn">
             <button class="btn btn-outline-secondary" type="button" id="server-add-btn">Add</button>
         </div>
-        <small class="text-muted">Server must be running <a href="https://github.com/mastodon/mastodon/releases/tag/v1.6.0" target="_blank">Mastodon 1.6</a> or newer.</small>
+        <small class="text-muted">Mastodon forks or alternative servers, like Wildebeest or PixelFed, may not be compatible.</small>
         <!-- Server select -->
         <div class="mt-3 mb-1">
             <label for="mastodon-server-list" class="form-label">Saved servers</label>
