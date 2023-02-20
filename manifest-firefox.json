@@ -1,0 +1,50 @@
+{
+	"manifest_version": 3,
+	"name": "Share to Mastodon",
+	"version": "2.0",
+	"author": "Corbin Davenport",
+	"homepage_url": "https://github.com/corbindavenport/share-to-mastodon",
+	"description": "Share links to Mastodon in one click!",
+	"options_ui": {
+		"page": "settings.html",
+		"open_in_tab": false
+	},
+	"action": {
+		"default_icon": {
+			"32": "img/icon_x32.png",
+			"48": "img/icon_action_x48.png",
+			"128": "img/icon_action_x128.png"
+		},
+		"default_title": "Share this page to Mastodon"
+	},
+	"commands": {
+		"_execute_action": {
+			"suggested_key": {
+				"default": "Ctrl+Shift+Y"
+			},
+			"description": "Share current page on Mastodon"
+		}
+	},
+	"permissions": [
+		"contextMenus",
+		"storage",
+		"notifications",
+		"activeTab"
+	],
+	"browser_specific_settings": {
+		"gecko": {
+			"id": "{4f049aab-274c-4a9b-8813-84b40b7d5ec4}",
+			"strict_min_version": "106.0"
+		}
+	},
+	"background": {
+		"scripts": [
+			"js/background.js"
+		]
+	},
+	"icons": {
+		"32": "img/icon_x32.png",
+		"48": "img/icon_x48.png",
+		"128": "img/icon_x128.png"
+	}
+}

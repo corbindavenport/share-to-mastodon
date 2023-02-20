@@ -34,6 +34,10 @@ chrome.runtime.onInstalled.addListener(function (details) {
 			})
 		})
 	}
+	// Initialize context menu
+	createContextMenu()
+	// Migrate data if needed
+	migrateOldData()
 })
 
 // Function for migrating data from version 1.0
@@ -44,7 +48,7 @@ async function migrateOldData() {
 		var oldServer = data.userServer
 		console.log('Migrating server selection ' + oldServer + ' to new format...')
 		// Move data
-		await chrome.storage.sync.set({serverList: [oldServer]})
+		await chrome.storage.sync.set({ serverList: [oldServer] })
 		// Delete old data
 		await chrome.storage.sync.remove('userServer')
 		console.log('Migration complete!')
@@ -113,7 +117,7 @@ chrome.contextMenus.onClicked.addListener(async function (info, tab) {
 })
 
 // Reload context menu options on storage change (e.g. when added or removed on settings page)
-chrome.storage.onChanged.addListener(function() {
+chrome.storage.onChanged.addListener(function () {
 	createContextMenu()
 })
 
@@ -139,9 +143,3 @@ function createPopup(serverUrl, shareLink, shareText, tab) {
 chrome.action.onClicked.addListener(async function (tab) {
 	createPopup('generic', tab.url, tab.title, tab)
 })
-
-// Initialize context menu
-createContextMenu()
-
-// Migrate data if needed
-migrateOldData()
