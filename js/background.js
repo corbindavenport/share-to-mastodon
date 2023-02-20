@@ -1,3 +1,5 @@
+const isFirefox = chrome.runtime.getURL('').startsWith('moz-extension://')
+
 // Initialize welcome message and context menu entry on extension load
 chrome.runtime.onInstalled.addListener(function (details) {
 	// Show welcome message
@@ -10,7 +12,7 @@ chrome.runtime.onInstalled.addListener(function (details) {
 			message: "Click here to see what's new in this version."
 		}
 		// Firefox doesn't support buttons in notifications
-		if (!window.navigator.userAgent.includes('Firefox')) {
+		if (!isFirefox) {
 			notification.buttons = [
 				{
 					title: 'Open Settings'
@@ -27,7 +29,7 @@ chrome.runtime.onInstalled.addListener(function (details) {
 				chrome.tabs.create({ url: 'https://corbin.io/introducing-share-to-mastodon/' })
 			})
 			// Handle notification button clicks
-			if (!window.navigator.userAgent.includes('Firefox')) {
+			if (!isFirefox) {
 				chrome.notifications.onButtonClicked.addListener(function (_, buttonIndex) {
 					if (buttonIndex === 0) {
 						chrome.runtime.openOptionsPage()
@@ -49,7 +51,7 @@ chrome.runtime.onInstalled.addListener(function (details) {
 async function migrateOldData() {
 	// Chrome/Edge version saved a single server in a "userServer" string in chrome.storage.sync
 	// Firefox version saved it in the same "userServer" string, but in chrome.local.sync
-	if (window.navigator.userAgent.includes('Firefox')) {
+	if (isFirefox) {
 		var data = await chrome.storage.local.get()
 	} else {
 		var data = await chrome.storage.sync.get()
