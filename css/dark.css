@@ -2,8 +2,8 @@ body {
     background-color: rgb(41, 42, 45);
 }
 
-body, a, .navbar, .nav-link, .navbar-brand, .list-group-item {
-    color: #FAFAFA;
+body, a, .navbar, .nav-link, .navbar-brand, .list-group-item, .text-muted {
+    color: #FAFAFA !important;
 }
 
 .navbar-toggler {
@@ -14,15 +14,19 @@ body, a, .navbar, .nav-link, .navbar-brand, .list-group-item {
     color: #d2d2d2 !important;
 }
 
-.card, .modal-content, .navbar, .list-group-item {
+.card, .modal-content, .navbar, .list-group-item-dark, .list-group-item:hover {
     background-color: #3b3b3b !important;
+}
+
+.list-group-item {
+    background-color: rgb(41, 42, 45);
 }
 
 .btn-close {
     background-color: #FAFAFA;
 }
 
-input[type="text"], textarea {
+input[type="text"], textarea, select {
     background: #3b3b3b !important;
     color: #FAFAFA !important;
     border-color: #6c757d !important;
