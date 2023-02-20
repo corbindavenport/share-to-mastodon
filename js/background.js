@@ -42,7 +42,7 @@ async function migrateOldData() {
 	var data = await chrome.storage.sync.get()
 	if (data.userServer) {
 		var oldServer = data.userServer
-		console('Migrating server selection ' + oldServer + ' to new format...')
+		console.log('Migrating server selection ' + oldServer + ' to new format...')
 		// Move data
 		await chrome.storage.sync.set({serverList: [oldServer]})
 		// Delete old data
