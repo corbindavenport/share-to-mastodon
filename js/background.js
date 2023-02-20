@@ -7,15 +7,18 @@ chrome.runtime.onInstalled.addListener(function (details) {
 			type: 'basic',
 			iconUrl: chrome.runtime.getURL('img/icon_x128.png'),
 			title: 'Share to Mastodon ' + chrome.runtime.getManifest().version + ' installed!',
-			buttons: [
+			message: "Click here to see what's new in this version."
+		}
+		// Firefox doesn't support buttons in notifications
+		if (!window.navigator.userAgent.includes('Firefox')) {
+			notification.buttons = [
 				{
 					title: 'Open Settings'
 				},
 				{
 					title: 'Join Discord'
 				}
-			],
-			message: "Click here to see what's new in this version."
+			]
 		}
 		// Send notification
 		chrome.notifications.create(notification, () => {
@@ -24,14 +27,16 @@ chrome.runtime.onInstalled.addListener(function (details) {
 				chrome.tabs.create({ url: 'https://corbin.io/introducing-share-to-mastodon/' })
 			})
 			// Handle notification button clicks
-			chrome.notifications.onButtonClicked.addListener(function (_, buttonIndex) {
-				if (buttonIndex === 0) {
-					chrome.runtime.openOptionsPage()
-				} else if (buttonIndex === 1) {
-					// Open Discord
-					chrome.tabs.create({ url: 'https://discord.com/invite/59wfy5cNHw' })
-				}
-			})
+			if (!window.navigator.userAgent.includes('Firefox')) {
+				chrome.notifications.onButtonClicked.addListener(function (_, buttonIndex) {
+					if (buttonIndex === 0) {
+						chrome.runtime.openOptionsPage()
+					} else if (buttonIndex === 1) {
+						// Open Discord
+						chrome.tabs.create({ url: 'https://discord.com/invite/59wfy5cNHw' })
+					}
+				})
+			}
 		})
 	}
 	// Initialize context menu
@@ -43,7 +48,7 @@ chrome.runtime.onInstalled.addListener(function (details) {
 // Function for migrating data from version 1.0
 async function migrateOldData() {
 	// Chrome/Edge version saved a single server in a "userServer" string in chrome.storage.sync
-	// Firefox version saved it in "userServer" string but in chrome.local.sync
+	// Firefox version saved it in the same "userServer" string, but in chrome.local.sync
 	if (window.navigator.userAgent.includes('Firefox')) {
 		var data = await chrome.storage.local.get()
 	} else {
@@ -134,7 +139,7 @@ function createPopup(serverUrl, shareLink, shareText, tab) {
 	var popupHeight = 500
 	var y = Math.round((tab.height / 2) - (popupHeight / 2))
 	var x = Math.round((tab.width / 2) - (popupWidth / 2))
-	console.log(popupWidth, popupHeight, y, x)
+	console.log('Popup dimensions:', popupWidth, popupHeight, y, x)
 	chrome.windows.create({
 		url: popupPage,
 		width: popupWidth,

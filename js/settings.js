@@ -51,7 +51,13 @@ document.querySelector('#server-remove-btn').addEventListener('click', function 
 
 // Open keyboard shortcut
 document.querySelector('#mastodon-keyboard-shortcut').addEventListener('click', function () {
-	chrome.tabs.create({ url: 'chrome://extensions/shortcuts#:~:text=Share%20to%20Mastodon' })
+	// Firefox cannot automatically navigate to the keyboard shortcut configuration page
+	if (window.navigator.userAgent.includes('Firefox')) {
+		const bsCollapse = new bootstrap.Collapse('#firefoxShortcutCollapse').show()
+	} else {
+		chrome.tabs.create({ url: 'chrome://extensions/shortcuts#:~:text=Share%20to%20Mastodon' })
+	}
+	
 })
 
 loadSettings()
