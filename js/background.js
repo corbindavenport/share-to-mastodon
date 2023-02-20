@@ -1,7 +1,5 @@
 // Initialize welcome message and context menu entry on extension load
 chrome.runtime.onInstalled.addListener(function (details) {
-	// Initialize context menu
-	createContextMenu()
 	// Show welcome message
 	if (details.reason === 'install' || details.reason === 'update') {
 		// Set message
@@ -37,6 +35,21 @@ chrome.runtime.onInstalled.addListener(function (details) {
 		})
 	}
 })
+
+// Function for migrating data from version 1.0
+// Version 1.0 saved a single server in a "userServer" string
+async function migrateOldData() {
+	var data = await chrome.storage.sync.get()
+	if (data.userServer) {
+		var oldServer = data.userServer
+		console('Migrating server selection ' + oldServer + ' to new format...')
+		// Move data
+		await chrome.storage.sync.set({serverList: [oldServer]})
+		// Delete old data
+		await chrome.storage.sync.remove('userServer')
+		console.log('Migration complete!')
+	}
+}
 
 // Function for creating context menu entries
 async function createContextMenu() {
@@ -126,3 +139,9 @@ function createPopup(serverUrl, shareLink, shareText, tab) {
 chrome.action.onClicked.addListener(async function (tab) {
 	createPopup('generic', tab.url, tab.title, tab)
 })
+
+// Initialize context menu
+createContextMenu()
+
+// Migrate data if needed
+migrateOldData()
