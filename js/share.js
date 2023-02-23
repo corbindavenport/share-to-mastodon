@@ -1,3 +1,16 @@
+// Function to generate URL
+function getFinalURL(domain, text, link) {
+    var url = ''
+    if (domain === 'elk.zone') {
+        // Elk web app
+        url = 'https://elk.zone/intent/post?text=' + encodeURIComponent(text + '<br /><br />' + link)
+    } else {
+        // Standard Mastodon URL intent
+        url = 'https://' + domain + '/share?text=' + encodeURIComponent(text + '\n\n' + link)
+    }
+    return url
+}
+
 // Function to initialize UI and redirects
 async function init() {
     // Generate links to options page
@@ -20,11 +33,11 @@ async function init() {
     // If there's only one server, or if the server was picked from the context menu, redirect to that one
     if (inputParams.get('server') != 'generic') {
         document.querySelector('#server-loading').classList.remove('d-none')
-        window.location = 'https://' + inputParams.get('server') + '/share?text=' + encodeURIComponent(shareText + '\n\n' + shareLink)
+        window.location = getFinalURL(inputParams.get('server'), shareText, shareLink)
         return false
     } else if (data.serverList.length === 1) {
         document.querySelector('#server-loading').classList.remove('d-none')
-        window.location = 'https://' + data.serverList[0] + '/share?text=' + encodeURIComponent(shareText + '\n\n' + shareLink)
+        window.location = getFinalURL(data.serverList[0], shareText, shareLink)
         return false
     }
     console.log(inputParams.get('server'))
@@ -36,11 +49,15 @@ async function init() {
         var linkEl = document.createElement('a')
         linkEl.classList.add('list-group-item', 'list-group-item', 'list-group-item-action', 'fw-bold')
         linkEl.innerText = serverUrl
-        linkEl.href = 'https://' + serverUrl + '/share?text=' + encodeURIComponent(shareText + '\n\n' + shareLink)
+        linkEl.href = getFinalURL(serverUrl, shareText, shareLink)
         linkEl.rel = 'preconnect'
         // Add server icon to list
         var serverImg = document.createElement('img')
-        serverImg.setAttribute('src', 'https://' + serverUrl + '/favicon.ico')
+        if (serverUrl === 'elk.zone') {
+            serverImg.setAttribute('src', chrome.runtime.getURL('img/elk.png'))
+        } else {
+            serverImg.setAttribute('src', 'https://' + serverUrl + '/favicon.ico')
+        }
         serverImg.setAttribute('alt', serverUrl + ' icon')
         serverImg.ariaHidden = 'true'
         serverImg.onerror = function() {
