@@ -91,17 +91,19 @@ async function createContextMenu() {
 				contexts: ['selection', 'link', 'page']
 			})
 		}
-		// Add seperator and link to settings
-		chrome.contextMenus.create({
-			id: 'none',
-			type: 'separator',
-			contexts: ['selection', 'link', 'page']
-		})
-		chrome.contextMenus.create({
-			id: 'edit-servers',
-			title: 'Edit server list',
-			contexts: ['selection', 'link', 'page']
-		})
+		// Add seperator and link to settings, but only if there's more than one server saved
+		if (data.serverList.length > 1) {
+			chrome.contextMenus.create({
+				id: 'none',
+				type: 'separator',
+				contexts: ['selection', 'link', 'page']
+			})
+			chrome.contextMenus.create({
+				id: 'edit-servers',
+				title: 'Edit server list...',
+				contexts: ['selection', 'link', 'page']
+			})
+		}
 	}
 }
 
