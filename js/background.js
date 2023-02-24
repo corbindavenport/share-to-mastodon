@@ -26,7 +26,7 @@ chrome.runtime.onInstalled.addListener(function (details) {
 		chrome.notifications.create(notification, () => {
 			// Handle notification click
 			chrome.notifications.onClicked.addListener(function () {
-				chrome.tabs.create({ url: 'https://corbin.io/introducing-share-to-mastodon/' })
+				chrome.tabs.create({ url: 'https://blog.corbin.io/post/710160748534530048/share-to-mastodon-20-is-now-available' })
 			})
 			// Handle notification button clicks
 			if (!isFirefox) {
