@@ -2,74 +2,81 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="css/bootstrap.css" rel="stylesheet">
-    <link href="css/dark.css" rel="stylesheet" media="(prefers-color-scheme: dark)">
-    <style>
-        body {
-            max-width: 450px;
-        }
-        select {
-            overflow: auto;
-        }
-    </style>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="icon" type="image/png" href="img/icon_x32.png">
+	<title>Share to Mastodon Settings</title>
+	<link href="css/bootstrap.css" rel="stylesheet">
 </head>
 
 <body class="user-select-none">
-    <div class="container-fluid">
-        <!-- Add a server -->
-        <label for="mastodon-server-text" class="form-label">Add a server</label>
-        <div class="input-group input-group-sm">
-            <input type="text" class="form-control" id="mastodon-server-text" placeholder="yourserver.social" aria-label="Server domain" aria-describedby="server-add-btn">
-            <button class="btn btn-outline-secondary" type="button" id="server-add-btn">Add</button>
-        </div>
-        <small class="text-muted">Mastodon forks or alternative servers, like Wildebeest or PixelFed, may not be compatible.</small>
-        <!-- Server select -->
-        <div class="mt-3 mb-1">
-            <label for="mastodon-server-list" class="form-label">Saved servers</label>
-            <select id="mastodon-server-list" class="form-select" size="5" aria-label="Saved servers list"></select>
-        </div>
-        <button class="btn btn-sm btn-outline-secondary w-100 mb-3" type="button" id="server-remove-btn">Remove selected</button>
-        <!-- Other options -->
-        <div class="mb-3">
-            <label class="form-label">Other settings</label>
-            <button type="button" class="btn btn-sm btn-primary w-100" id="mastodon-keyboard-shortcut">Change keyboard shortcut</button>
-            <div class="collapse mt-1" id="firefoxShortcutCollapse">
-                <div class="card card-body">
-                    Open about:addons in a new tab, click the settings gear button, then select "Manage extension shortcuts."
+	<!-- Header -->
+	<div class="container-fluid bg-light mb-5">
+		<div class="container bg-light py-5">
+			<div class="row">
+				<div class="col-9">
+					<h1 class="display-5 fw-bold">Share to Mastodon Settings</h1>
+					<p>This is where you can add or remove saved Mastodon servers or change the keyboard shortcut. Your changes are saved automatically.</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Main container -->
+	<div class="container">
+		<div class="row">
+			<!-- Main settings -->
+			<div class="col-md-8">
+				<!-- Add a server -->
+                <label for="mastodon-server-text" class="form-label">Add a server</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" id="mastodon-server-text" placeholder="yourserver.social" aria-label="Server domain" aria-describedby="server-help">
+                    <button class="btn btn-outline-primary" type="button" id="server-add-btn">Add</button>
                 </div>
-              </div>
-        </div>
-        <hr>
-        <p>If you find Share to Mastodon useful, please donate to support continued development. It would mean a lot!</p>
-        <div class="row mb-3">
-            <div class="col-6">
-                <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=4SZVSMJKDS35J&lc=US&item_name=Share%20to%20Mastodon%20Donation&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted" target="_blank">
-                    <button type="button" class="btn btn-sm btn-success w-100">Donate via PayPal</button>
-                </a>
-            </div>
-            <div class="col-6">
-                <a href="https://cash.app/$corbdav" target="_blank">
-                    <button type="button" class="btn btn-sm btn-success w-100">Donate via Cash App</button>
-                </a>
-            </div>
-        </div>
-        <hr>
-        <a href="https://github.com/corbindavenport/share-to-mastodon" target="_blank" class="d-block mb-3">
-            <button type="button" class="btn btn-sm btn-primary w-100">Open GitHub repository</button>
-        </a>
-        <a href="https://discord.com/invite/59wfy5cNHw" target="_blank" class="d-block mb-3">
-            <button type="button" class="btn btn-sm btn-primary w-100">Join Discord server</button>
-        </a>
-        <a href="https://toot.community/@corbin" target="_blank" class="d-block mb-3">
-            <button type="button" class="btn btn-sm btn-primary w-100">Follow on Mastodon</button>
-        </a>
-    </div>
+                <div id="server-help" class="form-text">Mastodon forks or alternative servers, like Wildebeest or PixelFed, may not be compatible.</div>
+                <!-- Server select -->
+                <div class="mt-3 mb-1">
+                    <label for="mastodon-server-list" class="form-label">Saved servers</label>
+                    <select id="mastodon-server-list" class="form-select" size="5" aria-label="Saved servers list"></select>
+                </div>
+                <button class="btn btn-outline-danger w-100 mb-3" type="button" id="server-remove-btn">Remove selected</button>
+                <!-- Other options -->
+                <div class="mb-3">
+                    <label class="form-label">Other settings</label>
+                    <button type="button" class="btn btn-outline-primary w-100" id="mastodon-keyboard-shortcut">Change keyboard shortcut</button>
+                    <div class="collapse mt-1" id="firefoxShortcutCollapse">
+                        <div class="card card-body">
+                            Open about:addons in a new tab, click the settings gear button, then select "Manage extension shortcuts."
+                        </div>
+                      </div>
+                </div>
+			</div>
+			<!-- Donation -->
+			<div class="col-md-4">
+				<h2>Donate</h2>
+				<p>If you find Share to Mastodon useful, please donate to support continued development. It would mean a lot!</p>
+                <a href="https://www.patreon.com/corbindavenport" target="_blank">
+					<button type="button" class="btn btn-success w-100 mb-3">Join the Patreon</button>
+				</a>
+				<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=4SZVSMJKDS35J&lc=US&item_name=Peek%20Donation&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted" target="_blank">
+					<button type="button" class="btn btn-success w-100 mb-3">Donate via PayPal</button>
+				</a>
+				<a href="https://cash.app/$corbdav" target="_blank">
+					<button type="button" class="btn btn-success w-100 mb-3">Donate via Cash App</button>
+				</a>
+				<p>Share to Mastodon is developed by <a href="https://corbin.io/?utm_source=Share%20to%20Mastodon%20Extension">Corbin Davenport</a>.</p>
+				<h2>Need help?</h2>
+				<p>If something isn't working, or if you just want to chat with other Share to Mastodon users, <a href="https://github.com/corbindavenport/share-to-mastodon/issues" target="_blank">create an issue on GitHub</a> or <a href="https://discord.com/invite/59wfy5cNHw" target="_blank">join the Discord server</a>.</p>
+			</div>
+		</div>
+		<!-- Footer -->
+		<div class="row">
+			<div class="bg-light rounded-3 pt-3 pb-3 mt-5 mb-5">
+				Share to Mastodon uses code from <a href="https://getbootstrap.com/" target="_blank">Bootstrap</a>. You can find the source code <a href="https://github.com/corbindavenport/share-to-mastodon" target="_blank">on GitHub</a>, under the GPL license.</div>
+		</div>
+	</div>
 
-    <script src="js/bootstrap.js"></script>
-    <script src="js/settings.js"></script>
+	<script src="js/settings.js"></script>
 
 </body>
 

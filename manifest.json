@@ -1,13 +1,13 @@
 {
 	"manifest_version": 3,
 	"name": "Share to Mastodon",
-	"version": "2.0",
+	"version": "2.1",
 	"author": "Corbin Davenport",
 	"homepage_url": "https://github.com/corbindavenport/share-to-mastodon",
-	"description": "Share links to Mastodon in one click!",
+	"description": "Share links to Mastodon in one click",
 	"options_ui": {
 		"page": "settings.html",
-		"open_in_tab": false
+		"open_in_tab": true
 	},
 	"action": {
 		"default_icon": {
