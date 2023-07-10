@@ -1,11 +1,13 @@
 // Function to generate URL
 function getFinalURL(domain, text, link) {
     var url = ''
-    if (domain === 'elk.zone') {
+    if ((domain === 'elk.zone') || (domain === 'main.elk.zone')) {
         // Elk web app
         url = 'https://elk.zone/intent/post?text=' + encodeURIComponent(text + '<br /><br />' + link)
     } else {
-        // Standard Mastodon URL intent
+        // Standard Mastodon URL intent, also used by Calckey, Misskey, and other projects
+        // Misskey documentation: https://misskey-hub.net/en/docs/features/share-form.html
+        // Calckey implementation: https://codeberg.org/calckey/calckey/src/branch/main/packages/backend/src/server/web/manifest.json#:~:text=share_target
         url = 'https://' + domain + '/share?text=' + encodeURIComponent(text + '\n\n' + link)
     }
     return url
@@ -53,7 +55,7 @@ async function init() {
         linkEl.rel = 'preconnect'
         // Add server icon to list
         var serverImg = document.createElement('img')
-        if (serverUrl === 'elk.zone') {
+        if ((serverUrl === 'elk.zone') || (serverUrl === 'main.elk.zone')) {
             serverImg.setAttribute('src', chrome.runtime.getURL('img/elk.png'))
         } else {
             serverImg.setAttribute('src', 'https://' + serverUrl + '/favicon.ico')
