@@ -30,16 +30,23 @@ function saveSettings() {
 
 // Add server to list
 document.querySelector('#server-add-btn').addEventListener('click', function () {
-	var domain = document.querySelector('#mastodon-server-text').value.replace(' ', '')
-	if (domain) {
-		var el = document.createElement('option')
-		el.value = domain
-		el.innerText = domain
-		serverList.appendChild(el)
-		serverList.value = domain
-		document.querySelector('#mastodon-server-text').value = ''
-		saveSettings()
+	// Get hostname from input
+	var serverInput = document.querySelector('#mastodon-server-text').value.replace(' ', '');
+	var serverDomain = '';
+	if (serverInput.startsWith('https://')) {
+		var serverObj = new URL(serverInput);
+		serverDomain = serverObj.hostname;
+	} else {
+		serverDomain = serverInput;
 	}
+	// Add URL to list
+	var el = document.createElement('option')
+	el.value = serverDomain
+	el.innerText = serverDomain
+	serverList.appendChild(el)
+	serverList.value = serverDomain
+	document.querySelector('#mastodon-server-text').value = ''
+	saveSettings()
 })
 
 // Remove button
@@ -57,7 +64,7 @@ document.querySelector('#mastodon-keyboard-shortcut').addEventListener('click', 
 	} else {
 		chrome.tabs.create({ url: 'chrome://extensions/shortcuts#:~:text=Share%20to%20Mastodon' })
 	}
-	
+
 })
 
 loadSettings()
