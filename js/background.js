@@ -4,43 +4,8 @@ const isFirefox = chrome.runtime.getURL('').startsWith('moz-extension://')
 chrome.runtime.onInstalled.addListener(function (details) {
 	// Show welcome message
 	if (details.reason === 'install' || details.reason === 'update') {
-		// Set message
-		const notification = {
-			type: 'basic',
-			iconUrl: chrome.runtime.getURL('img/icon_x128.png'),
-			title: 'Share to Mastodon ' + chrome.runtime.getManifest().version + ' installed!',
-			message: "Click here to see what's new in this version."
-		}
-		// Firefox doesn't support buttons in notifications
-		if (!isFirefox) {
-			notification.buttons = [
-				{
-					title: 'Open Settings'
-				},
-				{
-					title: 'Join Discord'
-				}
-			]
-		}
-		// Send notification
-		chrome.notifications.create(notification, () => {
-			// Handle notification click
-			chrome.notifications.onClicked.addListener(function () {
-				chrome.tabs.create({ url: 'https://blog.corbin.io/post/710160748534530048/share-to-mastodon-20-is-now-available' })
-			})
-			// Handle notification button clicks
-			if (!isFirefox) {
-				chrome.notifications.onButtonClicked.addListener(function (_, buttonIndex) {
-					if (buttonIndex === 0) {
-						chrome.runtime.openOptionsPage()
-					} else if (buttonIndex === 1) {
-						// Open Discord
-						chrome.tabs.create({ url: 'https://discord.com/invite/59wfy5cNHw' })
-					}
-				})
-			}
-		})
-	}
+		chrome.tabs.create({ 'url': chrome.runtime.getURL('welcome.html') });
+	  };
 	// Initialize context menu
 	createContextMenu()
 	// Migrate data if needed

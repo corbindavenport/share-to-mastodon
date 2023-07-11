@@ -28,7 +28,6 @@
 	"permissions": [
 		"contextMenus",
 		"storage",
-		"notifications",
 		"activeTab"
 	],
 	"browser_specific_settings": {

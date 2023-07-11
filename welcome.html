@@ -10,48 +10,28 @@
 	<link href="css/bootstrap.css" rel="stylesheet">
 </head>
 
-<body class="user-select-none">
+<body>
 	<!-- Header -->
 	<div class="container-fluid bg-light mb-5">
 		<div class="container bg-light py-5">
 			<div class="row">
 				<div class="col-9">
-					<h1 class="display-5 fw-bold">Share to Mastodon Settings</h1>
-					<p>This is where you can add or remove saved Mastodon servers or change the keyboard shortcut. Your changes are saved automatically.</p>
+					<h1 class="display-5 fw-bold">Share to Mastodon <span class="version"></span> is now installed!</h1>
+					<p>This update redesigns the settings menu, fixes a few bugs, improves support for Calckey and Misskey, and other changes. Check out the <a href="https://github.com/corbindavenport/share-to-mastodon/releases/latest" target="_blank">full changelog</a> for more details.</p>
 				</div>
 			</div>
 		</div>
 	</div>
 	<!-- Main container -->
 	<div class="container">
+		<!-- Info and donation -->
 		<div class="row">
-			<!-- Main settings -->
 			<div class="col-md-8">
-				<!-- Add a server -->
-				<label for="mastodon-server-text" class="form-label">Add a server</label>
-				<div class="input-group">
-					<input type="text" class="form-control" id="mastodon-server-text" placeholder="yourserver.social" aria-label="Server domain" aria-describedby="server-help">
-					<button class="btn btn-outline-primary" type="button" id="server-add-btn">Add server</button>
-				</div>
-				<div id="server-help" class="form-text">This must be a server running <a href="https://joinmastodon.org/" target="_blank">Mastodon</a>, <a href="https://calckey.org/" target="_blank">Calckey</a>, <a href="https://join.misskey.page/en-US/" target="_blank">Misskey</a>, or another compatible social media platform.</div>
-				<!-- Server select -->
-				<div class="mt-3 mb-1">
-					<label for="mastodon-server-list" class="form-label">Saved servers</label>
-					<select id="mastodon-server-list" class="form-select" size="5" aria-label="Saved servers list"></select>
-				</div>
-				<button class="btn btn-outline-danger w-100 mb-3" type="button" id="server-remove-btn">Remove selected</button>
-				<!-- Other options -->
-				<div class="mb-3">
-					<label class="form-label">Other settings</label>
-					<button type="button" class="btn btn-outline-primary w-100" id="mastodon-keyboard-shortcut">Change keyboard shortcut</button>
-					<div class="collapse mt-1" id="firefoxShortcutCollapse">
-						<div class="card card-body">
-							Open about:addons in a new tab, click the settings gear button, then select "Manage extension shortcuts."
-						</div>
-					</div>
-				</div>
+				<h2>How to use Share to Mastodon</h2>
+				<p>You can click the Mastodon icon in your browser's toolbar to share the current tab in a Mastodon post. You can also right-click anywhere on the page to share a link to the current tab. If you right-click a link, Share to Mastodon will use that link instead of the current page. If you select some text, then right-click and share to a Mastodon server, the text snippet will be included with the link in the post.</p>
+				<p>Share to Mastodon can save multiple servers in the settings, and give you a list to choose from each time you want to share. The list of servers can be updated from <a href="settings.html" target="_blank">the settings</a>.</p>
+				<p>Share to Mastodon also works with servers running some social media platforms besides Mastodon, such as <a href="https://calckey.org/" target="_blank">Calckey</a> and <a href="https://join.misskey.page/en-US/" target="_blank">Misskey</a>. Try adding the server and see what happens! You can also add the <a href="https://elk.zone/" target="_blank">Elk web client</a> if you use that.</p>
 			</div>
-			<!-- Donation -->
 			<div class="col-md-4">
 				<h2>Donate</h2>
 				<p>If you find Share to Mastodon useful, please donate to support continued development. It would mean a lot!</p>
@@ -76,7 +56,7 @@
 		</div>
 	</div>
 
-	<script src="js/settings.js"></script>
+	<script src="js/welcome.js"></script>
 
 </body>
 

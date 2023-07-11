@@ -26,7 +26,6 @@
 	"permissions": [
 		"contextMenus",
 		"storage",
-		"notifications",
 		"activeTab"
 	],
 	"minimum_chrome_version": "93",
