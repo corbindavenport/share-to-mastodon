@@ -36,8 +36,10 @@ document.querySelector('#server-add-btn').addEventListener('click', function () 
 	if (serverInput.startsWith('https://')) {
 		var serverObj = new URL(serverInput);
 		serverDomain = serverObj.hostname;
-	} else {
+	} else if (serverInput) {
 		serverDomain = serverInput;
+	} else {
+		return true;
 	}
 	// Add URL to list
 	var el = document.createElement('option')
