@@ -74,6 +74,7 @@ async function createContextMenu() {
 
 // Function for handling context menu clicks
 chrome.contextMenus.onClicked.addListener(async function (info, tab) {
+	console.log(info, tab)
 	// Open settings page if requested
 	if (info.menuItemId === 'edit-servers') {
 		chrome.runtime.openOptionsPage()
@@ -82,15 +83,12 @@ chrome.contextMenus.onClicked.addListener(async function (info, tab) {
 	// Set link and description
 	var shareLink = ''
 	var shareText = ''
-	if (info.linkUrl) {
-		shareLink = info.linkUrl
-		shareText = 'Type something here'
-	} else if (info.selectionText) {
+	if (info.selectionText) {
 		shareLink = info.pageUrl
 		shareText = '"' + info.selectionText + '"'
 	} else {
 		shareLink = info.pageUrl
-		shareText = 'Type something here'
+		shareText = tab.title
 	}
 	// Open popup
 	createPopup(info.menuItemId, shareLink, shareText, tab)
