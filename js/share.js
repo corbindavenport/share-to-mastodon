@@ -6,7 +6,7 @@ function getFinalURL(domain, text, link) {
         // Documentation: https://github.com/elk-zone/elk/blob/main/modules/pwa/i18n.ts#:~:text=share_target
         url = 'https://elk.zone/intent/post?text=' + encodeURIComponent(text + '<br /><br />' + link)
     } else {
-        // Standard Mastodon URL intent, also used by Firefish/Calckey, Misskey, and other projects
+        // Standard Mastodon URL intent, also used by Firefish/Calckey, Catodon, Misskey, and other projects
         // Misskey documentation: https://misskey-hub.net/en/docs/features/share-form.html
         // Firefish/Calckey implementation: https://codeberg.org/firefish/firefish/src/branch/main/packages/backend/src/server/web/manifest.json#:~:text=share_target
         url = 'https://' + domain + '/share?text=' + encodeURIComponent(text + '\n\n' + link)
