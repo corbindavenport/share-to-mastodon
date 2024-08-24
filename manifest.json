@@ -1,7 +1,7 @@
 {
 	"manifest_version": 3,
 	"name": "Share to Mastodon",
-	"version": "2.1",
+	"version": "2.2",
 	"author": "Corbin Davenport",
 	"homepage_url": "https://github.com/corbindavenport/share-to-mastodon",
 	"description": "Share links to Mastodon in one click",
