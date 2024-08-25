@@ -1,7 +1,7 @@
 {
 	"manifest_version": 3,
 	"name": "Share to Mastodon",
-	"version": "2.1",
+	"version": "2.2",
 	"author": "Corbin Davenport",
 	"homepage_url": "https://github.com/corbindavenport/share-to-mastodon",
 	"description": "Share links to Mastodon in one click",
@@ -19,8 +19,10 @@
 	},
 	"commands": {
 		"_execute_action": {
-		  "suggested_key": "Ctrl+Shift+S",
-		  "description": "Share current page on Mastodon"
+			"suggested_key": {
+				"default": "Ctrl+Shift+Y"
+			},
+			"description": "Share current page on Mastodon"
 		}
 	},
 	"permissions": [
@@ -28,8 +30,16 @@
 		"storage",
 		"activeTab"
 	],
-	"minimum_chrome_version": "93",
+	"browser_specific_settings": {
+		"gecko": {
+			"id": "{4f049aab-274c-4a9b-8813-84b40b7d5ec4}",
+			"strict_min_version": "106.0"
+		}
+	},
 	"background": {
+		"scripts": [
+			"js/background.js"
+		],
 		"service_worker": "js/background.js"
 	},
 	"icons": {

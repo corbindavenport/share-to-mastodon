@@ -74,6 +74,7 @@ async function createContextMenu() {
 
 // Function for handling context menu clicks
 chrome.contextMenus.onClicked.addListener(async function (info, tab) {
+	console.log(info, tab)
 	// Open settings page if requested
 	if (info.menuItemId === 'edit-servers') {
 		chrome.runtime.openOptionsPage()
@@ -82,15 +83,19 @@ chrome.contextMenus.onClicked.addListener(async function (info, tab) {
 	// Set link and description
 	var shareLink = ''
 	var shareText = ''
-	if (info.linkUrl) {
+	if ((info.linkText || info.selectionText) && info.linkUrl) {
+		// The user right-clicked on a link that has selected text
+		// Chromium sets the selected text as "selectionText", but Firefox uses "linkText"
 		shareLink = info.linkUrl
-		shareText = 'Type something here'
+		shareText = (info.linkText || info.selectionText)
 	} else if (info.selectionText) {
+		// The user selected text that isn't a link (at least not entirely)
 		shareLink = info.pageUrl
 		shareText = '"' + info.selectionText + '"'
 	} else {
+		// The user opened the context menu without selecting text (e.g right-clicking on the page background)
 		shareLink = info.pageUrl
-		shareText = 'Type something here'
+		shareText = tab.title
 	}
 	// Open popup
 	createPopup(info.menuItemId, shareLink, shareText, tab)
