@@ -14,7 +14,7 @@ function getFinalURL(domain, text, link) {
     return url
 }
 
-// Function to find the icon for a Mastodon server, and load it in list item's icon image
+// Function to find the icon for a Mastodon server, and load it in list item's image
 async function loadServerIcon(serverDomain, imgEl) {
     let iconImg;
     // Use built-in Elk icon for Elk servers

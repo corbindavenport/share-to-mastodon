@@ -4,7 +4,7 @@ Share to Mastodon is a browser extension for quickly sharing links and tabs to t
 
 The browser extension can store multiple server options, and synchronize them with your browser's settings. It uses the share dialog hosted by the selected server, so no API access or account permissions are required.
 
-Share to Mastodon is compatible with any Mastodon server, as well as platforms that have implemented Mastodon's share URL scheme, such as [Misskey](https://join.misskey.page/en-US/). It also works with the [Elk](https://elk.zone/) Mastodon web client.
+Share to Mastodon is compatible with any Mastodon server, as well as platforms that have implemented Mastodon's share URL scheme, such as [Misskey](https://misskey-hub.net/en/). It also works with the [Elk](https://elk.zone/) Mastodon web client.
 
 **[Download for Google Chrome](https://chrome.google.com/webstore/detail/bibnjflclpdmbbcncejifemmbggkcjde)**
 
