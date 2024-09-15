@@ -1,15 +1,18 @@
 // Function to generate URL
 function getFinalURL(domain, text, link) {
     var url = ''
-    if ((domain === 'elk.zone') || (domain === 'main.elk.zone')) {
+    if (domain === 'bsky.app') {
+        // Bluesky
+        url = 'https://bsky.app/intent/compose?text=' + encodeURIComponent(text + '<br /><br />' + link);
+    } else if ((domain === 'elk.zone') || (domain === 'main.elk.zone')) {
         // Elk web app
         // Documentation: https://github.com/elk-zone/elk/blob/main/modules/pwa/i18n.ts#:~:text=share_target
-        url = 'https://elk.zone/intent/post?text=' + encodeURIComponent(text + '<br /><br />' + link)
+        url = 'https://elk.zone/intent/post?text=' + encodeURIComponent(text + '<br /><br />' + link);
     } else {
         // Standard Mastodon URL intent, also used by Firefish/Calckey, Catodon, Misskey, and other projects
         // Misskey documentation: https://misskey-hub.net/en/docs/features/share-form.html
         // Firefish/Calckey implementation: https://codeberg.org/firefish/firefish/src/branch/main/packages/backend/src/server/web/manifest.json#:~:text=share_target
-        url = 'https://' + domain + '/share?text=' + encodeURIComponent(text + '\n\n' + link)
+        url = 'https://' + domain + '/share?text=' + encodeURIComponent(text + '\n\n' + link);
     }
     return url
 }
@@ -17,8 +20,11 @@ function getFinalURL(domain, text, link) {
 // Function to find the icon for a Mastodon server, and load it in list item's image
 async function loadServerIcon(serverDomain, imgEl) {
     let iconImg;
-    // Use built-in Elk icon for Elk servers
-    if ((serverDomain === 'elk.zone') || (serverDomain === 'main.elk.zone')) {
+    // Use built-in icons for Elk and Bluesky
+    if (serverDomain === 'bsky.app') {
+        imgEl.setAttribute('src', chrome.runtime.getURL('img/bluesky.png'));
+        return;
+    } else if ((serverDomain === 'elk.zone') || (serverDomain === 'main.elk.zone')) {
         imgEl.setAttribute('src', chrome.runtime.getURL('img/elk.png'));
         return;
     }

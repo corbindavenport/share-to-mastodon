@@ -28,6 +28,17 @@ function saveSettings() {
 	})
 }
 
+// Function to add a given server to the server list and save to settings
+function addServer(domain) {
+	var el = document.createElement('option')
+	el.value = domain
+	el.innerText = domain
+	serverList.appendChild(el)
+	serverList.value = domain
+	document.querySelector('#mastodon-server-text').value = ''
+	saveSettings()
+}
+
 // Add server to list
 document.querySelector('#server-add-btn').addEventListener('click', function () {
 	// Get hostname from input
@@ -41,14 +52,15 @@ document.querySelector('#server-add-btn').addEventListener('click', function () 
 	} else {
 		return true;
 	}
-	// Add URL to list
-	var el = document.createElement('option')
-	el.value = serverDomain
-	el.innerText = serverDomain
-	serverList.appendChild(el)
-	serverList.value = serverDomain
-	document.querySelector('#mastodon-server-text').value = ''
-	saveSettings()
+	addServer(serverDomain)
+})
+
+// Suggested services buttons
+document.querySelectorAll('.suggested-service-btn').forEach(function (el) {
+	el.addEventListener('click', function() {
+		const serverUrl = el.dataset.url;
+		addServer(serverUrl);
+	})
 })
 
 // Remove button
