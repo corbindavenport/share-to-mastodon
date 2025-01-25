@@ -12,8 +12,6 @@ Share to Mastodon is compatible with any Mastodon server, as well as platforms t
 
 **[Download for Microsoft Edge](https://microsoftedge.microsoft.com/addons/detail/share-to-mastodon/ppgabkpkgkkcejnnmgckomgfdeanejnc)**
 
-**[Set up Bookmarklet for other browsers](BOOKMARKLET.md)**
-
 This project is not affiliated with the Mastodon project or Mastodon gGmbH.
 
 ![Screenshot of extension in Google Chrome](https://i.imgur.com/vKexj06.png)
