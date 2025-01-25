@@ -76,7 +76,7 @@ document.querySelector('#mastodon-keyboard-shortcut').addEventListener('click', 
 	if (window.navigator.userAgent.includes('Firefox')) {
 		const bsCollapse = new bootstrap.Collapse('#firefoxShortcutCollapse').show();
 	} else {
-		chrome.tabs.create({ url: 'chrome://extensions/shortcuts#:~:text=Share%20to%20Mastodon' });
+		chrome.tabs.create({ url: 'chrome://extensions/shortcuts#:~:text=Mercury%20-%20Share%20to%20Bluesky%20and%20Mastodon' });
 	}
 
 })

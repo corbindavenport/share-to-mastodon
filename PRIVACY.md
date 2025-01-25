@@ -1,3 +1,3 @@
 # Privacy Policy
 
-Share to Mastodon does not collect any user data. The share dialog is hosted on your selected server, and the settings are syncronized through your web browser.
+Mercury stores user settings, such as Mastodon server lists, and syncronizes them with the browser's built-in sync platform (e.g. Firefox accounts in Firefox). The share dialog is opened directly from Bluesky or the selected Mastodon server. No other user data is collected.

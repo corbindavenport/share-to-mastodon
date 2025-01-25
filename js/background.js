@@ -68,7 +68,7 @@ async function createContextMenu() {
 		// Create generic menu item because no servers are set yet
 		chrome.contextMenus.create({
 			id: "generic",
-			title: 'Share to Mastodon',
+			title: 'Mercury',
 			contexts: ['selection', 'link', 'page']
 		})
 	}

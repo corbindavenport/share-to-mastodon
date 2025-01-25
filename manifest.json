@@ -1,10 +1,11 @@
 {
 	"manifest_version": 3,
-	"name": "Share to Mastodon",
-	"version": "2.2",
+	"name": "Mercury - Share to Bluesky and Mastodon",
+	"short_name": "Mercury",
+	"version": "3.0",
 	"author": "Corbin Davenport",
-	"homepage_url": "https://github.com/corbindavenport/share-to-mastodon",
-	"description": "Share links to Mastodon in one click",
+	"homepage_url": "https://github.com/corbindavenport/mercury",
+	"description": "Share links to Bluesky and Mastodon in one click",
 	"options_ui": {
 		"page": "settings.html",
 		"open_in_tab": true
@@ -15,14 +16,14 @@
 			"48": "img/icon_action_x48.png",
 			"128": "img/icon_action_x128.png"
 		},
-		"default_title": "Share this page to Mastodon"
+		"default_title": "Share this page with Mercury"
 	},
 	"commands": {
 		"_execute_action": {
 			"suggested_key": {
 				"default": "Ctrl+Shift+Y"
 			},
-			"description": "Share current page on Mastodon"
+			"description": "Share current page with Mercury"
 		}
 	},
 	"permissions": [
