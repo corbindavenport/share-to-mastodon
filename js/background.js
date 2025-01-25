@@ -1,15 +1,21 @@
 const isFirefox = chrome.runtime.getURL('').startsWith('moz-extension://')
 
 // Initialize welcome message and context menu entry on extension load
-chrome.runtime.onInstalled.addListener(function (details) {
+chrome.runtime.onInstalled.addListener(async function (details) {
 	// Show welcome message
 	if (details.reason === 'install' || details.reason === 'update') {
 		chrome.tabs.create({ 'url': chrome.runtime.getURL('welcome.html') });
-	  };
+	};
+	// Enable Bluesky setting for users with Mastodon servers already set
+	// Turning off Bluesky in settings will not re-enable this
+	var data = await chrome.storage.sync.get();
+	if (data.serverList && (data.serverList.length > 0) && !Object.hasOwn(data, 'blueskyEnabled')) {
+		await chrome.storage.sync.set({ blueskyEnabled: true });
+	}
 	// Initialize context menu
-	createContextMenu()
+	createContextMenu();
 	// Migrate data if needed
-	migrateOldData()
+	migrateOldData();
 })
 
 // Function for migrating data from version 1.0
@@ -39,36 +45,55 @@ async function createContextMenu() {
 	await chrome.contextMenus.removeAll()
 	// Create a menu entry for each saved server
 	var data = await chrome.storage.sync.get()
-	if ((!data.serverList) || (data.serverList.length === 0)) {
+	if ((data.serverList && data.serverList.length > 0) || data.blueskyEnabled) {
+		// Create Bluesky menu item if enabled
+		if (data.blueskyEnabled) {
+			chrome.contextMenus.create({
+				id: 'bsky.app',
+				title: 'Share to Bluesky',
+				contexts: ['selection', 'link', 'page']
+			})
+		}
+		// Create separator if both Bluesky and at least one Mastodon server are enabled
+		if (data.blueskyEnabled && data.serverList && (data.serverList.length > 0)) {
+			chrome.contextMenus.create({
+				id: 'separator1',
+				type: 'separator',
+				contexts: ['selection', 'link', 'page']
+			})
+		}
+		// Create menu item for each Mastodon server
+		if (data.serverList && data.serverList.length > 0) {
+			for (server in data.serverList) {
+				var serverUrl = data.serverList[server]
+				chrome.contextMenus.create({
+					id: serverUrl,
+					title: 'Share to ' + serverUrl,
+					contexts: ['selection', 'link', 'page']
+				})
+			}
+		}
+		// Add seperator and link to settings, but only if there are at least two services enabled
+		// Example: Bluesky and one Mastodon server, or two Mastodon servers
+		if ((data.blueskyEnabled && data.serverList && (data.serverList.length > 0)) || (data.serverList && (data.serverList.length > 1))) {
+			chrome.contextMenus.create({
+				id: 'separator2',
+				type: 'separator',
+				contexts: ['selection', 'link', 'page']
+			})
+			chrome.contextMenus.create({
+				id: 'edit-servers',
+				title: 'Edit service/server list...',
+				contexts: ['selection', 'link', 'page']
+			})
+		}
+	} else {
 		// Create generic menu item because no servers are set yet
 		chrome.contextMenus.create({
 			id: "generic",
 			title: 'Share to Mastodon',
 			contexts: ['selection', 'link', 'page']
 		})
-	} else {
-		// Create menu item for each saved server
-		for (server in data.serverList) {
-			var serverUrl = data.serverList[server]
-			chrome.contextMenus.create({
-				id: serverUrl,
-				title: 'Share to ' + serverUrl,
-				contexts: ['selection', 'link', 'page']
-			})
-		}
-		// Add seperator and link to settings, but only if there's more than one server saved
-		if (data.serverList.length > 1) {
-			chrome.contextMenus.create({
-				id: 'none',
-				type: 'separator',
-				contexts: ['selection', 'link', 'page']
-			})
-			chrome.contextMenus.create({
-				id: 'edit-servers',
-				title: 'Edit server list...',
-				contexts: ['selection', 'link', 'page']
-			})
-		}
 	}
 }
 

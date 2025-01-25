@@ -1,3 +1,5 @@
+const serverListEl = document.querySelector('#server-list');
+
 // Function to generate URL
 function getFinalURL(domain, text, link) {
     var url = ''
@@ -57,6 +59,23 @@ async function loadServerIcon(serverDomain, imgEl) {
     imgEl.src = iconImg;
 }
 
+// Function to create list item for a service
+function createListItem(serverUrl, shareText, shareLink) {
+    // Create link list element
+    var linkEl = document.createElement('a');
+    linkEl.classList.add('list-group-item', 'list-group-item', 'list-group-item-action', 'fw-bold');
+    linkEl.innerText = serverUrl;
+    linkEl.href = getFinalURL(serverUrl, shareText, shareLink);
+    linkEl.rel = 'preconnect';
+    // Add server icon to list
+    var serverImg = document.createElement('img');
+    loadServerIcon(serverUrl, serverImg);
+    serverImg.setAttribute('alt', '');
+    linkEl.prepend(serverImg);
+    // Inject element
+    serverListEl.appendChild(linkEl);
+}
+
 // Function to initialize UI and redirects
 async function init() {
     // Generate links to options page
@@ -71,38 +90,35 @@ async function init() {
     var shareLink = inputParams.get('link')
     var shareText = inputParams.get('text')
     var data = await chrome.storage.sync.get()
-    // Show warning if no servers are saved
-    if ((!data.serverList) || (data.serverList.length === 0)) {
+    // Show warning if Bluesky isn't enabled and no servers are saved
+    if ((!data.blueskyEnabled) && ((!data.serverList) || (data.serverList.length === 0))) {
         document.querySelector('#server-warning').classList.remove('d-none')
         return false
     }
-    // If there's only one server, or if the server was picked from the context menu, redirect to that one
+    // Redirect to a service/server automatically if certain conditions are met
     if (inputParams.get('server') != 'generic') {
+        // If the server was picked from the context menu, redirect to that server
         document.querySelector('#server-loading').classList.remove('d-none')
         window.location = getFinalURL(inputParams.get('server'), shareText, shareLink)
         return false
-    } else if (data.serverList.length === 1) {
+    } else if (!data.blueskyEnabled && (data.serverList && (data.serverList.length === 1))) {
+        // If Bluesky is not enabled, and there is only one Mastodon server enabled, redirect to the one Mastodon server
         document.querySelector('#server-loading').classList.remove('d-none')
         window.location = getFinalURL(data.serverList[0], shareText, shareLink)
         return false
+    } else if (data.blueskyEnabled && ((!data.serverList) || (data.serverList.length === 0))) {
+        // If Bluesky is enabled, and there are no Mastodon servers enabled, redirect to Bluesky
+        document.querySelector('#server-loading').classList.remove('d-none')
+        window.location = getFinalURL('bsky.app', shareText, shareLink)
+        return false
     }
-    // Create list of servers
-    var serverListEl = document.querySelector('#server-list')
+    // Create list item for Bluesky if enabled
+    if (data.blueskyEnabled) {
+        createListItem('bsky.app', shareText, shareLink);
+    }
+    // Create list of Mastodon servers
     for (server in data.serverList) {
-        // Create link list element
-        var serverUrl = data.serverList[server]
-        var linkEl = document.createElement('a')
-        linkEl.classList.add('list-group-item', 'list-group-item', 'list-group-item-action', 'fw-bold')
-        linkEl.innerText = serverUrl
-        linkEl.href = getFinalURL(serverUrl, shareText, shareLink)
-        linkEl.rel = 'preconnect'
-        // Add server icon to list
-        var serverImg = document.createElement('img')
-        loadServerIcon(serverUrl, serverImg)
-        serverImg.setAttribute('alt', '')
-        linkEl.prepend(serverImg)
-        // Inject element
-        serverListEl.appendChild(linkEl)
+        createListItem(data.serverList[server], shareText, shareLink);
     }
     // Show list
     serverListEl.classList.remove('d-none')

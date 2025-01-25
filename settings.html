@@ -27,38 +27,47 @@
 		<div class="row">
 			<!-- Main settings -->
 			<div class="col-md-8">
-				<!-- Highlighted services -->
-				<div class="mb-3">
-					<label class="form-label d-block">Add a suggested server or app</label>
-					<!-- mastodon.social -->
-					<button class="btn btn-outline-primary btn-sm mb-1 suggested-service-btn" data-url="mastodon.social" type="button">Mastodon.social</button>
-					<!-- Bluesky -->
-					<button class="btn btn-outline-primary btn-sm mb-1 suggested-service-btn" data-url="bsky.app" type="button">Bluesky</button>
-					<!-- mastodon.online -->
-					<button class="btn btn-outline-primary btn-sm mb-1 suggested-service-btn" data-url="mastodon.online" type="button">Mastodon.online</button>
-					<!-- Elk web app -->
-					<button class="btn btn-outline-primary btn-sm mb-1 suggested-service-btn" data-url="elk.zone" type="button">Elk</button>
+				<!-- Bluesky card -->
+				<div class="card mb-3">
+					<div class="card-body">
+						<h5 class="card-title">Bluesky <span class="badge text-bg-primary mx-2">New</span></h5>
+						<div id="bluesky-help" class="form-text">This will add <a href="https://bsky.app/" target="_blank">Bluesky</a> to the share list. Only the default bsky.app web app is supported.</div>
+						<div class="form-check mt-2">
+							<input class="form-check-input" type="checkbox" value="" id="bluesky-enabled" aria-describedby="bluesky-help">
+							<label class="form-check-label" for="bluesky-enabled">
+								Enable Bluesky
+							</label>
+						</div>
+					</div>
 				</div>
-				<!-- Custom server entry -->
-				<label for="mastodon-server-text" class="form-label">Add a custom server or app</label>
-				<div class="input-group">
-					<input type="text" class="form-control" id="mastodon-server-text" placeholder="yourserver.social" aria-label="Server domain" aria-describedby="server-help">
-					<button class="btn btn-outline-secondary" type="button" id="server-add-btn">Add server</button>
+				<!-- Mastodon and Fediverse -->
+				<div class="card mb-3">
+					<div class="card-body">
+						<h5 class="card-title">Mastodon and Fediverse</h5>
+						<!-- Custom server entry -->
+						<label for="mastodon-server-text" class="form-label">Add a custom server or app</label>
+						<div class="input-group">
+							<input type="text" class="form-control" id="mastodon-server-text" placeholder="yourserver.social" aria-label="Server domain" aria-describedby="server-help">
+							<button class="btn btn-outline-primary" type="button" id="server-add-btn">Add server</button>
+						</div>
+						<div id="server-help" class="form-text">This must be a server running <a href="https://joinmastodon.org/" target="_blank">Mastodon</a>, <a href="https://misskey-hub.net/en/" target="_blank">Misskey</a>, or another compatible social media platform. You can also enter <b>elk.zone</b> for the Elk web app or <b>bsky.app</b> for Bluesky.</div>
+						<!-- Server select -->
+						<div class="mt-3 mb-1">
+							<label for="mastodon-server-list" class="form-label">Saved servers and apps</label>
+							<select id="mastodon-server-list" class="form-select" size="5" aria-label="Saved servers list"></select>
+						</div>
+						<button class="btn btn-outline-danger btn-sm mb-3 w-100" type="button" id="server-remove-btn">Remove selected server</button>
+					</div>
 				</div>
-				<div id="server-help" class="form-text">This must be a server running <a href="https://joinmastodon.org/" target="_blank">Mastodon</a>, <a href="https://misskey-hub.net/en/" target="_blank">Misskey</a>, or another compatible social media platform. You can also enter <b>elk.zone</b> for the Elk web app or <b>bsky.app</b> for Bluesky.</div>
-				<!-- Server select -->
-				<div class="mt-3 mb-1">
-					<label for="mastodon-server-list" class="form-label">Saved servers and apps</label>
-					<select id="mastodon-server-list" class="form-select" size="5" aria-label="Saved servers list"></select>
-				</div>
-				<button class="btn btn-outline-danger btn-sm mb-3" type="button" id="server-remove-btn">Remove</button>
 				<!-- Other options -->
-				<div class="mb-3">
-					<label class="form-label">Other settings</label>
-					<button type="button" class="btn btn-outline-primary w-100" id="mastodon-keyboard-shortcut">Change keyboard shortcut</button>
-					<div class="collapse mt-1" id="firefoxShortcutCollapse">
-						<div class="card card-body">
-							Open about:addons in a new tab, click the settings gear button, then select "Manage extension shortcuts."
+				<div class="card mb-3">
+					<div class="card-body">
+						<h5 class="card-title mb-3">Other settings</h5>
+						<button type="button" class="btn btn-outline-primary w-100" id="mastodon-keyboard-shortcut">Change keyboard shortcut</button>
+						<div class="collapse mt-1" id="firefoxShortcutCollapse">
+							<div class="card card-body">
+								Open about:addons in a new tab, click the settings gear button, then select "Manage extension shortcuts."
+							</div>
 						</div>
 					</div>
 				</div>
