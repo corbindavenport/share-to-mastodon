@@ -64,7 +64,11 @@ function createListItem(serverUrl, shareText, shareLink) {
     // Create link list element
     var linkEl = document.createElement('a');
     linkEl.classList.add('list-group-item', 'list-group-item', 'list-group-item-action', 'fw-bold');
-    linkEl.innerText = serverUrl;
+    if (serverUrl === 'bsky.app') {
+        linkEl.innerText = 'Bluesky';
+    } else {
+        linkEl.innerText = serverUrl;
+    }
     linkEl.href = getFinalURL(serverUrl, shareText, shareLink);
     linkEl.rel = 'preconnect';
     // Add server icon to list
