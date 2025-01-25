@@ -14,30 +14,7 @@ chrome.runtime.onInstalled.addListener(async function (details) {
 	}
 	// Initialize context menu
 	createContextMenu();
-	// Migrate data if needed
-	migrateOldData();
 })
-
-// Function for migrating data from version 1.0
-async function migrateOldData() {
-	// Chrome/Edge version saved a single server in a "userServer" string in chrome.storage.sync
-	// Firefox version saved it in the same "userServer" string, but in chrome.local.sync
-	if (isFirefox) {
-		var data = await chrome.storage.local.get()
-	} else {
-		var data = await chrome.storage.sync.get()
-	}
-	if (data.userServer) {
-		var oldServer = data.userServer
-		console.log('Migrating server selection ' + oldServer + ' to new format...')
-		// Move data
-		await chrome.storage.sync.set({ serverList: [oldServer] })
-		// Delete old data
-		await chrome.storage.local.clear()
-		await chrome.storage.sync.remove('userServer')
-		console.log('Migration complete!')
-	}
-}
 
 // Function for creating context menu entries
 async function createContextMenu() {
